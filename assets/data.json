@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Tamjai",
+    "type": "Food",
+    "date": "2024/04/25",
+    "amount": "-100"
+  },
+  {
+    "title": "Uniqlo",
+    "type": "Clothing",
+    "date": "2024/04/25",
+    "amount": "-500"
+  },
+  {
+    "title": "KFC",
+    "type": "Food",
+    "date": "2024/04/25",
+    "amount": "-55.5"
+  },
+  {
+    "title": "Agoda",
+    "type": "Travel",
+    "date": "2024/04/25",
+    "amount": "600"
+  }
+]
