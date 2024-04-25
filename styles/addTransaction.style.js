@@ -29,6 +29,13 @@ export default styles = StyleSheet.create({
     paddingRight: 20,
     borderRadius: 20,
   },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10
+  },
   addBtn: {
     alignSelf: 'center',
     backgroundColor: '#4285F4',
@@ -47,5 +54,17 @@ export default styles = StyleSheet.create({
     alignSelf: 'center',
     width: 300,
     height: 300
+  },
+  polarityBtn: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+  },
+  polarityBtnText: {
+    color: 'white',
+    fontWeight: 'bold'
   }
 });

@@ -26,7 +26,7 @@ export async function addTransaction(data) {
   try {
     let jsonTransactions = await getTransactions();
     let transactions = JSON.parse(jsonTransactions);
-    transactions.push(data);
+    transactions.unshift(data);
     transactions = JSON.stringify(transactions);
     await AsyncStorage.setItem(
       '@Transaction:list',
