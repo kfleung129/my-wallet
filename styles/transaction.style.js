@@ -10,35 +10,44 @@ export default styles = StyleSheet.create({
   transaction: {
     display: 'flex',
     flexDirection: 'row',
-    padding: '5%',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 15,
+    paddingBottom: 15,
     width: '100%',
+    minHeight: 90,
     backgroundColor: '#fff',
     borderRadius: 12,
-    gap: 10,
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    gap: 10,
   },
   info: {
     width: '60%',
-    gap: 10,
+    gap: 20,
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
-    gap: '8%',
-    alignItems: 'center'
+    alignItems: 'center',
+    gap: 6,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   typeTag: {
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingTop: 3,
-    paddingBottom: 3,
-    backgroundColor: 'lightgreen',
-    borderRadius: 4
+    paddingLeft: 6,
+    paddingRight: 6,
+    paddingTop: 4,
+    paddingBottom: 4,
+    backgroundColor: '#4285F4',
+    borderRadius: 10,
+  },
+  type: {
+    fontSize: 10,
+    color: 'white',
+    fontWeight: 'bold'
   },
   total: {
     width: 'auto',
@@ -54,4 +63,8 @@ export default styles = StyleSheet.create({
   negative: {
     color: 'red'
   },
+  date: {
+    fontSize: 12,
+    fontWeight: 'bold'
+  }
 });

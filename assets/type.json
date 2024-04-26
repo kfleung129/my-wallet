@@ -1,0 +1,10 @@
+[
+  { "label": "Clothing", "value": "clothing" },
+  { "label": "Entertainment", "value": "entertainment" },
+  { "label": "Food", "value": "food" },
+  { "label": "Gadget", "value": "gadget" },
+  { "label": "Transport", "value": "transport" },
+  { "label": "Rental", "value": "rental" },
+  { "label": "Health", "value": "health" },
+  { "label": "Travel", "value": "travel" },
+]

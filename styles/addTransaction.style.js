@@ -2,17 +2,23 @@ import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
   container: {
+    flex: 1,
+    paddingTop: 40,
+    gap: 20,
+  },
+  inputWrapper: {
     display: 'flex',
     width: '100%',
     height: '100%',
     padding: '5%',
-    gap: 15
+    gap: 16
   },
   input: {
     display: 'flex',
+    height: '7%', 
     flexDirection: 'row',
-    gap: 5,
     justifyContent: 'flex-start',
+    gap: 5,
   },
   name: {
     fontSize: 16,
@@ -37,34 +43,56 @@ export default styles = StyleSheet.create({
     gap: 10
   },
   addBtn: {
-    alignSelf: 'center',
     backgroundColor: '#4285F4',
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 45,
-    paddingRight: 45,
-    borderRadius: 30,
+    borderRadius: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   addBtnText: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16
   },
+  header: {
+    width: '100%',
+  },
   picture: {
     alignSelf: 'center',
-    width: 300,
-    height: 300
+    width: 250,
+    height: 250
   },
   polarityBtn: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 40,
-    height: 40,
-    borderRadius: 50,
+    borderRadius: 20,
+    width: 35,
+    height: 35,
+    justifyContent: 'center'
   },
   polarityBtnText: {
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  picker: {
+    inputIOS: {
+      minWidth: '75%',
+      backgroundColor: '#FFFFFF',
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingLeft: 20,
+      paddingRight: 20,
+      borderRadius: 20,
+    },
+    inputAndroid: {
+      width: '75%',
+      backgroundColor: '#FFFFFF',
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingLeft: 20,
+      paddingRight: 20,
+      borderRadius: 20,
+    }
   }
 });

@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function isNull(item) {
@@ -22,8 +23,22 @@ export function dateToString(date) {
   return dateStr;
 }
 
+export function validateNewTransaction(data) {
+  for(let key in data) {
+    if(isNull(data[key])) return false;
+  }
+  return true;
+}
+
 export async function addTransaction(data) {
   try {
+    if(!validateNewTransaction(data)) {
+      Alert.alert(
+        'Warning', 'Please input all the required area !', 
+        [{ text: 'Ok' }]
+      );
+      return false;
+    }
     let jsonTransactions = await getTransactions();
     let transactions = JSON.parse(jsonTransactions);
     transactions.unshift(data);
@@ -32,9 +47,11 @@ export async function addTransaction(data) {
       '@Transaction:list',
       transactions
     );
+    return true
     
   } catch (error) {
     console.error(error);
+    return false;
   }
 }
 

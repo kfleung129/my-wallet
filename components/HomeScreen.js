@@ -4,13 +4,15 @@ import { useNavigation } from "@react-navigation/native";
 import styles from '../styles/home.style';
 import TransactionScreen from './TransactionScreen';
 import Button from "./Button";
+import ConfirmModal from "./ConfirmModal";
 import { getTransactionList, resetTransactions, searchFilter } from "../utils/util";
 
 export default function HomeScreen(props) {
   const { route } = props;
   const [searchKeyword, setSearchKeyword] = useState('');
   const [transactionList, setTransactionList] = useState([]);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const navigation = useNavigation();
   
   const onRefresh = useCallback(() => {
@@ -18,6 +20,11 @@ export default function HomeScreen(props) {
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
+  }, []);
+
+  const confirmRemoveTransactions = useCallback(() => {
+    resetTransactions()
+    onRefresh()
   }, []);
 
   useEffect(() => {
@@ -35,6 +42,12 @@ export default function HomeScreen(props) {
 
   return (
     <View style={styles.container}>
+      <ConfirmModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        text="You sure you want to remove all transactions ?"
+        callback={confirmRemoveTransactions}
+      />
       <SafeAreaView style={styles.header}>
         <TextInput
           style={styles.search}
@@ -51,8 +64,7 @@ export default function HomeScreen(props) {
         <Button 
           text="-"
           handler={() => {
-            resetTransactions()
-            onRefresh()
+            setOpenModal(true);
           }}
           btnStyle={styles.addBtn}
           textStyle={styles.addBtnText}

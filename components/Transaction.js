@@ -5,6 +5,7 @@ import styles from '../styles/transaction.style';
 export default function HomeScreen(props) {
   const { data } = props;
   const { title, type, date, amount } = data;
+  const polarizedAmount = `${amount > 0 ? '+' : '-'}${Math.abs(amount)} HKD`; 
 
   return (
     <View style={styles.transaction}>
@@ -21,7 +22,7 @@ export default function HomeScreen(props) {
       </View>
       <View style={styles.total}>
         <Text style={{ ...styles.amount, ...(amount > 0 ? styles.positive : styles.negative) }}>
-          {amount} HKD
+          {polarizedAmount}
           </Text>
       </View>
     </View>
