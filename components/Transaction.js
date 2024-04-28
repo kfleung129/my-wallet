@@ -1,17 +1,20 @@
 import { useRef, useCallback } from "react";
-import { Text, View } from "react-native";
+import { Text, View, Pressable } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
+import { useNavigation } from '@react-navigation/native';
 import { deleteTransaction } from "../utils/util";
 import styles from '../styles/transaction.style';
 import Button from "./Button";
 
 export default function Transaction(props) {
-  const { data, index, refreshing, onRefresh } = props;
+  const { data, index, onRefresh, refreshing } = props;
   const { title, type, date, amount } = data;
   const ref = useRef(null);
+  const navigation = useNavigation();
   const polarizedAmount = `${amount > 0 ? '+' : '-'}${Math.abs(amount)} HKD`;
-  const confirmDeleteTransaction = useCallback(() => {
-    deleteTransaction(index);
+  
+  const confirmDeleteTransaction = useCallback(async () => {
+    await deleteTransaction(index);
   }, []);
 
   const renderRightActions = (progress, dragX) => {
@@ -27,6 +30,7 @@ export default function Transaction(props) {
       />
     );
   };
+  const onPress = () => navigation.navigate("Transaction", { method: "edit", transaction: data, index: index });
   // Close the swipe tab whenever refresh
   if(refreshing) ref.current?.close();
   
@@ -36,7 +40,7 @@ export default function Transaction(props) {
       overshootRight={false}
       ref={ref}
     >
-      <View style={styles.transaction}>
+      <Pressable style={styles.transaction} onPress={onPress}>
         <View style={styles.info}>
           <View style={styles.header}>
             <Text style={styles.title}>{title}</Text>
@@ -53,7 +57,7 @@ export default function Transaction(props) {
             {polarizedAmount}
             </Text>
         </View>
-      </View>
+      </Pressable>
     </Swipeable>
   );
 };

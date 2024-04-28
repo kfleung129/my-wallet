@@ -3,36 +3,40 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './components/HomeScreen';
-import AddTransactionScreen from './components/AddTransactionScreen';
+import TransactionScreen from './components/TransactionScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-function Home () {
+function TabStackNavigator() {
   return (
-    <View>
-      <Text>Hello World!</Text>
-    </View>
-  )
+    <Tab.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Home"
+    >
+      <Tab.Screen name="Home" component={StackNavigator} />
+      <Tab.Screen name="Add" component={StackNavigator} />
+    </Tab.Navigator>
+  );
 }
+
+function StackNavigator() {
+  return (
+    <Stack.Navigator
+      initialRouteName="HomeScreen"
+    >
+      <Stack.Screen component={HomeScreen} name="HomeScreen" options={{ title: "Transaction History", headerBackTitleVisible: false }} />
+      <Stack.Screen component={TransactionScreen} name="Transaction" options={{ title: "Transaction - Add", headerBackTitleVisible: false }} />
+    </Stack.Navigator>
+  );
+}
+
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerBackTitle: "",
-          headerStyle: {
-            alignItems: 'start',
-          },
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}>
-        <Stack.Screen component={HomeScreen} name="HomeScreen" options={{ title: "Transaction History", headerBackTitleVisible: false }} />
-        <Stack.Screen component={AddTransactionScreen} name="AddTransaction" options={{ title: "Transaction - Add", headerBackTitleVisible: false }} />
-        <Stack.Screen component={Home} name="Contact" options={{ title: "Contact Us" }} />
-      </Stack.Navigator>
+      <StackNavigator />
       <StatusBar style="auto" />
     </NavigationContainer>
   );

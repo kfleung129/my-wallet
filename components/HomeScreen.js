@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { SafeAreaView, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from '../styles/home.style';
-import TransactionScreen from './TransactionScreen';
+import TransactionList from './TransactionList';
 import Button from "./Button";
 import ConfirmModal from "./ConfirmModal";
 import { getTransactionList, resetTransactions, searchFilter } from "../utils/util";
@@ -11,37 +11,30 @@ export default function HomeScreen(props) {
   const { route } = props;
   const [searchKeyword, setSearchKeyword] = useState('');
   const [transactionList, setTransactionList] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(route.params?.reload ?? false);
   const [openModal, setOpenModal] = useState(false);
   const navigation = useNavigation();
-  
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 1000);
-  }, []);
 
-  const confirmRemoveTransactions = useCallback(() => {
-    resetTransactions()
-    onRefresh()
-  }, []);
-
-  useEffect(() => {
+  const onRefresh = useCallback(async () => {
     async function fetchTransactions() {
       let transactionList = await getTransactionList();
       setTransactionList(transactionList);
-    }
+      setRefreshing(false);
+    }    
     fetchTransactions();
-  }, [refreshing])
-  
-  if(route.params?.reload) {
+  }, []);
+
+  const confirmRemoveTransactions = useCallback(() => {
+    resetTransactions();
     onRefresh();
-    route.params.reload = false;
-  }
+  }, []);
+
+  useEffect(() => {
+    onRefresh();
+  }, [props.route.params]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <ConfirmModal
         openModal={openModal}
         setOpenModal={setOpenModal}
@@ -57,7 +50,7 @@ export default function HomeScreen(props) {
         />
         <Button 
           text="+"
-          handler={() => navigation.navigate("AddTransaction")}
+          handler={() => navigation.navigate("Transaction", { method: "add" })}
           btnStyle={styles.addBtn}
           textStyle={styles.addBtnText}
         />
@@ -70,7 +63,7 @@ export default function HomeScreen(props) {
           textStyle={styles.addBtnText}
         />
       </SafeAreaView>
-      <TransactionScreen
+      <TransactionList
         dataList={searchFilter(transactionList, searchKeyword)}
         refreshing={refreshing}
         onRefresh={onRefresh}

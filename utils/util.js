@@ -15,12 +15,22 @@ export function searchFilter(dataList, searchKeyword) {
 }
 
 export function dateToString(date) {
-  if(isNull(date)) return '';
+  if(isNull(date)) return null;
   const year = date.getFullYear();
   const month =  date.getMonth() + 1;
   const day = date.getDate() - 1;
   const dateStr = `${year}/${month}/${day}`;
   return dateStr;
+}
+
+export function stringToDate(date) {
+  if(isNull(date)) return null;
+  const dateList = date.split('/');
+  const year = parseInt(dateList[0]);
+  const month =  parseInt(dateList[1]);
+  const day = parseInt(dateList[2]);
+  const newDate = new Date(year, month - 1, day);
+  return newDate;
 }
 
 export function validateNewTransaction(data) {
@@ -40,13 +50,33 @@ export async function addTransaction(data) {
       return false;
     }
     let transactions = await getTransactionList();
+    if(isNull(transactions) || !Array.isArray([])) return false;
     transactions.unshift(data);
     transactions = JSON.stringify(transactions);
-    await AsyncStorage.setItem(
-      '@Transaction:list',
-      transactions
-    );
-    return true
+    await saveTransactions(transactions);
+    return true;
+    
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export async function editTransaction(data, index) {
+  try {
+    if(!validateNewTransaction(data)) {
+      Alert.alert(
+        'Warning', 'Please input all the required area !', 
+        [{ text: 'Ok' }]
+      );
+      return false;
+    }
+    let transactions = await getTransactionList();
+    if(isNull(transactions) || !Array.isArray(transactions) || !transactions[index]) return false;
+    transactions[index] = data;
+    transactions = JSON.stringify(transactions);
+    await saveTransactions(transactions);
+    return true;
     
   } catch (error) {
     console.error(error);
@@ -61,13 +91,23 @@ export async function deleteTransaction(index) {
     if(isNull(transactions[index])) return false;
     transactions.splice(index, 1);
     transactions = JSON.stringify(transactions);
+    await saveTransactions(transactions);
+    return true;
     
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export async function saveTransactions(transactions) {
+  try {
     await AsyncStorage.setItem(
       '@Transaction:list',
       transactions
     );
     return true
-    
+
   } catch (error) {
     console.error(error);
     return false;
