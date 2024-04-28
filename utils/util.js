@@ -39,10 +39,29 @@ export async function addTransaction(data) {
       );
       return false;
     }
-    let jsonTransactions = await getTransactions();
-    let transactions = JSON.parse(jsonTransactions);
+    let transactions = await getTransactionList();
     transactions.unshift(data);
     transactions = JSON.stringify(transactions);
+    await AsyncStorage.setItem(
+      '@Transaction:list',
+      transactions
+    );
+    return true
+    
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export async function deleteTransaction(index) {
+  try {
+    if(isNull(index)) return false;
+    let transactions = await getTransactionList();
+    if(isNull(transactions[index])) return false;
+    transactions.splice(index, 1);
+    transactions = JSON.stringify(transactions);
+    
     await AsyncStorage.setItem(
       '@Transaction:list',
       transactions

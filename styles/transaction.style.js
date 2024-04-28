@@ -66,5 +66,19 @@ export default styles = StyleSheet.create({
   date: {
     fontSize: 12,
     fontWeight: 'bold'
+  },
+  swipeDelete: { 
+    marginLeft: -10,
+    width: '20%',
+    backgroundColor: 'red',
+    padding: 10,
+    borderTopRightRadius: 12,
+    borderBottomRightRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  swipeDeleteText: {
+    fontSize: 24,
+    color: 'white'
   }
 });

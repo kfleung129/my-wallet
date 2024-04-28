@@ -1,5 +1,6 @@
 import React from "react";
-import { View, SafeAreaView, FlatList, RefreshControl } from "react-native";
+import { View, FlatList, RefreshControl } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styles from '../styles/transaction.style';
 import Transaction from './Transaction';
 
@@ -11,12 +12,14 @@ function FlatListItemSeperator() {
 
 export default function HomeScreen(props) {
   const { dataList, refreshing, onRefresh } = props;
-  
+
   return (
-    <SafeAreaView >
+    <GestureHandlerRootView >
       <FlatList 
         data={dataList}
-        renderItem={(data) => <Transaction data={data.item} />}
+        renderItem={(data) => (
+          <Transaction data={data.item} index={data.index} refreshing={refreshing} onRefresh={onRefresh} />
+        )}
         keyExtractor={(item, index) => index}
         ItemSeparatorComponent={FlatListItemSeperator}
         style={styles.container}
@@ -24,6 +27,6 @@ export default function HomeScreen(props) {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
-    </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }; 

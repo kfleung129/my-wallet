@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, View, Text, SafeAreaView, TextInput, Image } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
