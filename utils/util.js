@@ -18,7 +18,7 @@ export function dateToString(date) {
   if(isNull(date)) return null;
   const year = date.getFullYear();
   const month =  date.getMonth() + 1;
-  const day = date.getDate() - 1;
+  const day = date.getDate();
   const dateStr = `${year}/${month}/${day}`;
   return dateStr;
 }
@@ -50,7 +50,7 @@ export async function addTransaction(data) {
       return false;
     }
     let transactions = await getTransactionList();
-    if(isNull(transactions) || !Array.isArray([])) return false;
+    if(isNull(transactions) || !Array.isArray(transactions)) return false;
     transactions.unshift(data);
     transactions = JSON.stringify(transactions);
     await saveTransactions(transactions);

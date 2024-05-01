@@ -11,23 +11,23 @@ export default styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     padding: '5%',
-    gap: 16
+    gap: 16,
   },
-  input: {
+  inputArea: {
     display: 'flex',
     height: '7%', 
     flexDirection: 'row',
     justifyContent: 'flex-start',
     gap: 5,
   },
-  name: {
+  inputName: {
     fontSize: 16,
     fontWeight: 'bold',
     minWidth: '20%',
     alignSelf: 'center'
   },
-  textInput: {
-    width: '75%',
+  input: {
+    minWidth: '80%',
     backgroundColor: '#FFFFFF',
     paddingTop: 10,
     paddingBottom: 10,
@@ -77,7 +77,8 @@ export default styles = StyleSheet.create({
   },
   picker: {
     inputIOS: {
-      minWidth: '75%',
+      minWidth: '80%',
+      color: 'black',
       backgroundColor: '#FFFFFF',
       paddingTop: 10,
       paddingBottom: 10,
@@ -86,7 +87,8 @@ export default styles = StyleSheet.create({
       borderRadius: 20,
     },
     inputAndroid: {
-      width: '75%',
+      minWidth: '80%',
+      color: 'black',
       backgroundColor: '#FFFFFF',
       paddingTop: 10,
       paddingBottom: 10,

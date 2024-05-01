@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { SafeAreaView, TextInput, View } from "react-native";
+import { SafeAreaView, TextInput, View, Image, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from '../styles/home.style';
 import TransactionList from './TransactionList';
@@ -34,7 +34,7 @@ export default function HomeScreen(props) {
   }, [props.route.params]);
 
   return (
-    <View style={styles.container} >
+    <View style={[styles.container, { opacity: (openModal ? 0.2 : 1) }]} >
       <ConfirmModal
         openModal={openModal}
         setOpenModal={setOpenModal}
@@ -63,11 +63,21 @@ export default function HomeScreen(props) {
           textStyle={styles.addBtnText}
         />
       </SafeAreaView>
-      <TransactionList
-        dataList={searchFilter(transactionList, searchKeyword)}
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-      />
+      {
+        transactionList.length > 0 ?
+        <TransactionList
+          dataList={searchFilter(transactionList, searchKeyword)}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        /> :
+        <View style={styles.background}>
+          <Image
+            style={styles.picture}
+            source={require('../assets/bg.png')}
+          />
+          <Text>Add your transaction 💸</Text>
+        </View>
+      }
     </View>
   );
 };

@@ -4,7 +4,7 @@ export default styles = StyleSheet.create({
   container: {
     padding: '5%',
     gap: 10,
-    height: '92%'
+    height: '92%',
   },  
   header: {
     display: 'flex',
@@ -33,4 +33,15 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold'
   },
+  background: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    opacity: 0.6
+  },
+  picture: {
+    width: 300,
+    height: 300,
+    marginTop: '30%'
+  }
 });
